@@ -22,8 +22,7 @@ print(c)
 y = qi.Operator(c)
 print(y)
 
-print(x @ y)
-
+print("This should be the identity:", x @ y)
 
 
 
