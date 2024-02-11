@@ -1,29 +1,46 @@
-from qft import getQFT, getInvQFT
+from qft import getQFT
 
 
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 import qiskit.quantum_info as qi		# For converting the circuit to a matrix (testing)
 
 
-n = 2
+n = 3
 
 registers = QuantumRegister(n, "a")
-c = getQFT(registers[:])
+c = QuantumCircuit(registers)
+c.append(getQFT(registers[:]))
 
 print(c)
 x = qi.Operator(c)
 print(x)
 
+#o = c.decompose();
+#print(o)
 
-registers = QuantumRegister(n, "a")
-c = getInvQFT(registers[:])
+#p = c.to_instruction()
+#print(p)
 
-print(c)
-y = qi.Operator(c)
+from qiskit.circuit.library import QFT
+
+d = QuantumCircuit(registers)
+d.compose(QFT(n), inplace=True)
+
+print(d)
+y = qi.Operator(d)
 print(y)
 
-print("This should be the identity:", x @ y)
+
+print(x-y)
+
+#registers = QuantumRegister(n, "a")
+#c = getQFT(registers[:], inverse=True)
+
+#print(c)
+#y = qi.Operator(c)
+#print(y)
+
+#print("This should be the identity:", x @ y)
 
 
-print("This was a test.")
 
