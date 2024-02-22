@@ -103,7 +103,7 @@ def testPhaseEst():
 	#plot_distribution(statistics)
 	#plt.show()
 
-#testQFT(3)
+testQFT(3)
 
 testPhaseEst()
 
